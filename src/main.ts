@@ -51,6 +51,32 @@ program
         const opts = options.opts()
         const { name, pin, balance } = opts
 
+        if (!name) {
+            outro(chalk.bgRed.white('Please provide a name'))
+            process.exit(1)
+        }
+
+        // make sure name does not container number
+        if (/\d/.test(name)) {
+            outro(chalk.bgRed.white('Name cannot contain numbers'))
+            process.exit(1)
+        }
+
+        if (isNaN(pin)) {
+            outro(chalk.bgRed.white('Please provide a valid PIN'))
+            process.exit(1)
+        }
+
+        if (pin.length != 6) {
+            outro(chalk.bgRed.white('PIN should be 6 digits long'))
+            process.exit(1)
+        }
+
+        if (isNaN(balance) || parseInt(balance) < 0) {
+            outro(chalk.bgRed.white('Please provide a valid balance'))
+            process.exit(1)
+        }
+
         const insertedId = await accountService.register({
             name,
             pin,

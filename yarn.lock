@@ -24,11 +24,6 @@
   resolved "https://registry.npmjs.org/@develoka/angka-rupiah-js/-/angka-rupiah-js-1.0.3.tgz"
   integrity sha512-dkWuclc7reZd6eFGOnnm8vwWIkMbGdceSUILrJKMf2sBhOxc5/J169p2vTS1orX3dRoEZtZqb53ajKKv9zVT5A==
 
-"@esbuild/linux-x64@0.25.4":
-  version "0.25.4"
-  resolved "https://registry.npmjs.org/@esbuild/linux-x64/-/linux-x64-0.25.4.tgz"
-  integrity sha512-6e0cvXwzOnVWJHq+mskP8DNSrKBr1bULBvnFLpc1KY+d+irZSgZ02TGse5FsafKS5jg2e4pbvK6TPXaF/A6+CA==
-
 "@types/knex@^0.16.1":
   version "0.16.1"
   resolved "https://registry.npmjs.org/@types/knex/-/knex-0.16.1.tgz"

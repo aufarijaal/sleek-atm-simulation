@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".", // sets the root at the project root
+    "paths": {
+      "@/*": ["src/*"] // this maps @ to ./src
+    },
+    "outDir": "./dist",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "target": "esnext",
+    "module": "esnext"
+  },
+  "include": ["src/**/*.ts"],
+}

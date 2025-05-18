@@ -1,0 +1,43 @@
+{
+  "name": "sleek-atm-simulation",
+  "description": "A MYSQL powered simple simulated ATM system with features such as user registration, login, and transaction management.",
+  "author": {
+    "name": "Muhammad Aufa Rijal"
+  },
+  "version": "1.0.0",
+  "main": "dist/main.cjs",
+  "license": "MIT",
+  "type": "commonjs",
+  "scripts": {
+    "dev": "tsx src/main.ts",
+    "build": "npx tsc --noEmit && node esbuild.config.cjs",
+    "start": "node dist/main.cjs"
+  },
+  "dependencies": {
+    "@clack/prompts": "^0.10.1",
+    "@develoka/angka-rupiah-js": "^1.0.3",
+    "chalk": "^5.4.1",
+    "knex": "^3.1.0",
+    "mysql2": "^3.14.1"
+  },
+  "devDependencies": {
+    "@types/knex": "^0.16.1",
+    "@types/node": "^22.15.18",
+    "commander": "^13.1.0",
+    "esbuild": "^0.25.4",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3"
+  },
+  "keywords": [
+    "mysql",
+    "atm",
+    "simulation"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aufarijaal/sleek-atm-simulation"
+  },
+  "bin": {
+    "sleek-atm-simulation": "dist/main.cjs"
+  }
+}

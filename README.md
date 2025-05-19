@@ -16,4 +16,4 @@ A MYSQL powered ATM Simulation system with features:
 
 ## Preview
 
-![preview](preview.gif)
+![preview](peek_1.gif)

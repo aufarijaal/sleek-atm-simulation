@@ -17,6 +17,7 @@
     "@clack/prompts": "^0.10.1",
     "@develoka/angka-rupiah-js": "^1.0.3",
     "chalk": "^5.4.1",
+    "cli-table3": "^0.6.5",
     "knex": "^3.1.0",
     "mysql2": "^3.14.1"
   },

@@ -141,14 +141,22 @@ async function transfer({
     }
 }
 
-async function transactionHistory({ id }: { id: number }): Promise<void> {
+async function transactionHistory(id: number): Promise<
+    {
+        amount: number
+        type: string
+        target_id?: string
+        created_at: string
+    }[]
+> {
     try {
         const result = await getDB()
             .table('transactions')
             .where({ account_id: id })
-        console.log(result)
+
+        return result
     } catch (error) {
-        console.log('Error fetching transaction history')
+        throw new Error(error)
     }
 }
 

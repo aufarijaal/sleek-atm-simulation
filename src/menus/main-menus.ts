@@ -4,6 +4,7 @@ import withdraw from '@/actions/withdraw'
 import deposit from '@/actions/deposit'
 import checkBalance from '@/actions/check-balance'
 import transfer from '@/actions/transfer'
+import history from '@/actions/history'
 
 export async function mainMenu() {
     const menu = await select({
@@ -13,6 +14,7 @@ export async function mainMenu() {
             { value: 'deposit', label: 'Deposit' },
             { value: 'tf', label: 'Transfer' },
             { value: 'withdraw', label: 'Withdraw' },
+            { value: 'history', label: 'History' },
             { value: 'logout', label: 'Logout' },
         ],
     })
@@ -26,5 +28,7 @@ export async function mainMenu() {
         withdraw()
     } else if (menu === 'tf') {
         transfer()
+    } else if (menu === 'history') {
+        history()
     }
 }

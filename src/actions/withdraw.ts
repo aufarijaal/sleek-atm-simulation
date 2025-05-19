@@ -55,11 +55,7 @@ export default async function withdraw() {
         })
     } catch (error) {
         log.error(error.message)
-        const shouldContinue = await confirm({
-            message: 'Do you want to retry? No will go to main menu',
-        })
-        shouldContinue ? await withdraw() : mainMenu()
-        return
+        return mainMenu()
     }
 
     log.message(chalk.bold.bgYellow.black(' WITHDRAW '))
@@ -81,5 +77,5 @@ export default async function withdraw() {
     const shouldContinue = await confirm({
         message: 'Do you want to continue? No will logout',
     })
-    shouldContinue ? await mainMenu() : logout()
+    return shouldContinue ? await mainMenu() : logout()
 }

@@ -17,5 +17,5 @@ export default async function checkBalance() {
     const shouldContinue = await confirm({
         message: 'Do you want to continue?',
     })
-    shouldContinue ? await mainMenu() : logout()
+    return shouldContinue ? await mainMenu() : logout()
 }

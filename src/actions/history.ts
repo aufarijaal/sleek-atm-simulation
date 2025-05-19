@@ -8,28 +8,30 @@ import transactionService from '@/services/transaction-service'
 import Table from 'cli-table3'
 
 export default async function history() {
-    const table = new Table()
     const balance = await transactionService.transactionHistory(
         Session.loggedInId
     )
 
     log.message(chalk.bold.bgMagenta.white(' TRANSACTION HISTORY '))
-    table.push(
-        ['Amount', 'Type', 'Target ID', 'Timestamp'],
-        ...balance.map((item) => [
-            toRupiah(item.amount),
-            item.type,
-            item.target_id?.toString() ?? chalk.dim('-'),
-            new Date(item.created_at)
-                .toISOString()
-                .replace('.000Z', '')
-                .split('T')
-                .join(' '),
-        ])
-    )
-    console.log(table.toString())
+    if (balance.length) {
+        const table = new Table()
+        table.push(
+            ['Amount', 'Type', 'Target ID', 'Timestamp'],
+            ...balance.map((item) => [
+                toRupiah(item.amount),
+                item.type,
+                item.target_id?.toString() ?? chalk.dim('-'),
+                new Date(item.created_at)
+                    .toISOString()
+                    .replace('.000Z', '')
+                    .split('T')
+                    .join(' '),
+            ])
+        )
+        console.log(table.toString())
+    } else log.warn('No transactions yet.')
     const shouldContinue = await confirm({
         message: 'Do you want to continue?',
     })
-    shouldContinue ? await mainMenu() : logout()
+    return shouldContinue ? await mainMenu() : logout()
 }

@@ -36,7 +36,7 @@ export default async function transfer() {
         const shouldContinue = await confirm({
             message: 'Do you want to retry?',
         })
-        shouldContinue ? await transfer() : logout()
+        return shouldContinue ? await transfer() : logout()
     } else recipientName = result
 
     log.message(chalk.bold.bgBlue.white(' TRANSFER '))
@@ -67,12 +67,7 @@ export default async function transfer() {
             })
         } catch (error) {
             log.error(error.message)
-            const shouldContinue = await confirm({
-                message:
-                    'Do you want to retry transferring? No will back to main menu',
-            })
-            shouldContinue ? await transfer() : mainMenu()
-            return
+            return mainMenu()
         }
     } else mainMenu()
 
@@ -94,5 +89,5 @@ export default async function transfer() {
     const shouldContinue = await confirm({
         message: 'Do you want to continue? No will logout',
     })
-    shouldContinue ? await mainMenu() : logout()
+    return shouldContinue ? await mainMenu() : logout()
 }

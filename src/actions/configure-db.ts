@@ -56,6 +56,7 @@ async function configureDb() {
     fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
 
     outro(`✅ Database configuration saved to ${configPath}`)
+    process.exit(0)
 }
 
 export default configureDb

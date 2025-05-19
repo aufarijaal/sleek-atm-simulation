@@ -59,8 +59,7 @@ export default async function deposit() {
         const shouldContinue = await confirm({
             message: 'Do you want to retry? No will back to main menu',
         })
-        shouldContinue ? await deposit() : mainMenu()
-        return
+        return shouldContinue ? await deposit() : mainMenu()
     }
 
     log.message(chalk.bold.bgGreen.white(' DEPOSIT '))
@@ -80,5 +79,6 @@ export default async function deposit() {
     const shouldContinue = await confirm({
         message: 'Do you want to continue? No will logout',
     })
-    shouldContinue ? await mainMenu() : logout()
+
+    return shouldContinue ? await mainMenu() : logout()
 }

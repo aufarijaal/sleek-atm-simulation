@@ -7,6 +7,8 @@ import chalk from 'chalk'
 import { mainMenu } from './menus/main-menus'
 import { checkDBExsistence, init } from './db'
 import configureDb from './actions/configure-db'
+import register from './actions/register'
+import login from './actions/login'
 
 const program = new Command()
 
@@ -35,10 +37,7 @@ program
 program
     .command('register')
     .description('Register a new account')
-    .requiredOption('-n, --name <name>', 'Name of the account holder')
-    .requiredOption('-p, --pin <pin>', 'PIN for the account')
-    .option('-b, --balance <balance>', 'Initial balance', '0')
-    .action(async (str: any, options) => {
+    .action(async () => {
         try {
             intro(chalk.bgBlue.white('Checking Database'))
             checkDBExsistence()
@@ -48,56 +47,13 @@ program
             process.exit(1)
         }
 
-        const opts = options.opts()
-        const { name, pin, balance } = opts
-
-        if (!name) {
-            outro(chalk.bgRed.white('Please provide a name'))
-            process.exit(1)
-        }
-
-        // make sure name does not container number
-        if (/\d/.test(name)) {
-            outro(chalk.bgRed.white('Name cannot contain numbers'))
-            process.exit(1)
-        }
-
-        if (isNaN(pin)) {
-            outro(chalk.bgRed.white('Please provide a valid PIN'))
-            process.exit(1)
-        }
-
-        if (pin.length != 6) {
-            outro(chalk.bgRed.white('PIN should be 6 digits long'))
-            process.exit(1)
-        }
-
-        if (isNaN(balance) || parseInt(balance) < 0) {
-            outro(chalk.bgRed.white('Please provide a valid balance'))
-            process.exit(1)
-        }
-
-        const insertedId = await accountService.register({
-            name,
-            pin,
-            balance: parseFloat(balance),
-        })
-
-        if (insertedId === -1) {
-            console.log('Error registering account')
-            return
-        }
-
-        console.log(`🥳 Account registered with ID: ${insertedId}`)
-        process.exit(0)
+        register()
     })
 
 program
     .command('login')
     .description('Login to an existing account')
-    .requiredOption('-i, --id <id>', 'Account ID')
-    .requiredOption('-p, --pin <pin>', 'PIN for the account')
-    .action(async (str: any, options) => {
+    .action(async () => {
         try {
             intro(chalk.bgBlue.white('Checking Database'))
             checkDBExsistence()
@@ -107,22 +63,7 @@ program
             process.exit(1)
         }
 
-        const opts = options.opts()
-        const { id, pin } = opts
-
-        try {
-            const name = await accountService.login({
-                id: parseInt(id),
-                pin,
-            })
-
-            intro(chalk.bgCyan('ATM Simulation'))
-            log.message(`☺️ Welcome back, ${name}!`)
-            await mainMenu()
-        } catch (error) {
-            log.error(error.message)
-            process.exit(1)
-        }
+        login()
     })
 
 program.parse()
